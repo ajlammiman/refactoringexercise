@@ -4,3 +4,9 @@ C:\Users\alammiman\source\repos\MineGame\bin\MineGame.dll
 C:\Users\alammiman\source\repos\MineGame\bin\MineGame.pdb
 C:\Users\alammiman\source\repos\MineGame\obj\Debug\MineGame.dll
 C:\Users\alammiman\source\repos\MineGame\obj\Debug\MineGame.pdb
+C:\Projects\refactoringexercise\MineGame\bin\MineGame.dll
+C:\Projects\refactoringexercise\MineGame\bin\MineGame.pdb
+C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.csprojAssemblyReference.cache
+C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.csproj.CoreCompileInputs.cache
+C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.dll
+C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.pdb

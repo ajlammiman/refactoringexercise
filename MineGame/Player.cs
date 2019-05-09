@@ -19,5 +19,6 @@ namespace MineGame
         {
             CurrentPosition = newPosition;
         }
+
     }
 }

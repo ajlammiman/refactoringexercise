@@ -10,5 +10,12 @@
             X = x;
             Y = y;
         }
+
+        public override bool Equals(object that)
+        {
+            return that is Position position && X == position.X && Y == position.Y;
+        }
+
+        
     }
 }

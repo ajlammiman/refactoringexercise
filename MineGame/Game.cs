@@ -2,14 +2,19 @@
 
 namespace MineGame
 {
-    public class Game
+    public interface IGame
+    {
+        void MoveDown();
+        void MoveLeft();
+        void MoveRight();
+        void MoveUp();
+    }
+
+    public class Game : IGame
     {
         private readonly IBoard board;
         private readonly IPlayer player;
 
-        public Game()
-        {
-        }
 
         public Game(IBoard board, IPlayer player)
         {
@@ -24,6 +29,7 @@ namespace MineGame
             player.ChangePosition(newPosition);
         }
 
+
         public void MoveDown()
         {
             var currentPosition = player.CurrentPosition;
@@ -35,6 +41,13 @@ namespace MineGame
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
+            player.ChangePosition(newPosition);
+        }
+
+        public void MoveRight()
+        {
+            var currentPosition = player.CurrentPosition;
+            var newPosition = new Position(currentPosition.X + 1, currentPosition.Y);
             player.ChangePosition(newPosition);
         }
     }

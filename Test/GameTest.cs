@@ -1,7 +1,8 @@
-﻿using NSubstitute;
+﻿using MineGame;
+using NSubstitute;
 using NUnit.Framework;
 
-namespace MineGame
+namespace Test
 {
     [TestFixture]
     class GameTest
@@ -19,9 +20,9 @@ namespace MineGame
             
             game.MoveUp();
 
-            Assert.That(player.CurrentPosition.X, Is.EqualTo(endPosition.X));
-            Assert.That(player.CurrentPosition.Y, Is.EqualTo(endPosition.Y));
+            Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
+
 
         [Test]
         public void a_player_can_move_down_one_space()
@@ -36,8 +37,7 @@ namespace MineGame
 
             game.MoveDown();
 
-            Assert.That(player.CurrentPosition.X, Is.EqualTo(endPosition.X));
-            Assert.That(player.CurrentPosition.Y, Is.EqualTo(endPosition.Y));
+            Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
         [Test]
@@ -53,8 +53,23 @@ namespace MineGame
 
             game.MoveLeft();
 
-            Assert.That(player.CurrentPosition.X, Is.EqualTo(endPosition.X));
-            Assert.That(player.CurrentPosition.Y, Is.EqualTo(endPosition.Y));
+            Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
+        }
+
+        [Test]
+        public void a_player_can_move_right_one_space()
+        {
+            var startPosition = new Position(1, 1);
+            var endPosition = new Position(2, 1);
+
+            var board = Substitute.For<IBoard>();
+            var player = new Player(startPosition);
+
+            var game = new Game(board, player);
+
+            game.MoveRight();
+
+            Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
     }
 }
