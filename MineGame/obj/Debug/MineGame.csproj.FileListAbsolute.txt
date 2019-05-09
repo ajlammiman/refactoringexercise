@@ -1,0 +1,6 @@
+C:\Users\alammiman\source\repos\MineGame\obj\Debug\MineGame.csprojAssemblyReference.cache
+C:\Users\alammiman\source\repos\MineGame\obj\Debug\MineGame.csproj.CoreCompileInputs.cache
+C:\Users\alammiman\source\repos\MineGame\bin\MineGame.dll
+C:\Users\alammiman\source\repos\MineGame\bin\MineGame.pdb
+C:\Users\alammiman\source\repos\MineGame\obj\Debug\MineGame.dll
+C:\Users\alammiman\source\repos\MineGame\obj\Debug\MineGame.pdb

@@ -1,0 +1,10 @@
+C:\Users\alammiman\source\repos\RefactorKata\obj\Debug\RefactorKata.csprojAssemblyReference.cache
+C:\Users\alammiman\source\repos\RefactorKata\obj\Debug\RefactorKata.csproj.CoreCompileInputs.cache
+C:\Users\alammiman\source\repos\RefactorKata\bin\RefactorKata.exe.config
+C:\Users\alammiman\source\repos\RefactorKata\bin\RefactorKata.exe
+C:\Users\alammiman\source\repos\RefactorKata\bin\RefactorKata.pdb
+C:\Users\alammiman\source\repos\RefactorKata\bin\MineGame.dll
+C:\Users\alammiman\source\repos\RefactorKata\bin\MineGame.pdb
+C:\Users\alammiman\source\repos\RefactorKata\obj\Debug\RefactorKata.csproj.CopyComplete
+C:\Users\alammiman\source\repos\RefactorKata\obj\Debug\RefactorKata.exe
+C:\Users\alammiman\source\repos\RefactorKata\obj\Debug\RefactorKata.pdb
