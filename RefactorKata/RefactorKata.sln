@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorKata", "RefactorKata.csproj", "{D267B1C6-0E76-4A2B-916C-8417FF42A5B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineGameConsole", "MineGameConsole.csproj", "{D267B1C6-0E76-4A2B-916C-8417FF42A5B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineGame", "..\MineGame\MineGame.csproj", "{7E70BC79-58BC-456C-BD48-0CA8D0C8CFBF}"
 EndProject

@@ -19,7 +19,23 @@ namespace MineGame
 
         public void MoveUp()
         {
-            throw new NotImplementedException();
+            var currentPosition = player.CurrentPosition;
+            var newPosition = new Position(currentPosition.X, currentPosition.Y + 1);
+            player.ChangePosition(newPosition);
+        }
+
+        public void MoveDown()
+        {
+            var currentPosition = player.CurrentPosition;
+            var newPosition = new Position(currentPosition.X, currentPosition.Y - 1);
+            player.ChangePosition(newPosition);
+        }
+
+        public void MoveLeft()
+        {
+            var currentPosition = player.CurrentPosition;
+            var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
+            player.ChangePosition(newPosition);
         }
     }
 }
