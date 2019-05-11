@@ -20,8 +20,9 @@ namespace Test
 
             var game = new Game(board, player);
             
-            game.MoveUp();
+            var valid = game.MoveUp();
 
+            Assert.IsTrue(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -38,8 +39,9 @@ namespace Test
 
             var game = new Game(board, player);
 
-            game.MoveDown();
+            var valid = game.MoveDown();
 
+            Assert.IsTrue(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -55,8 +57,9 @@ namespace Test
 
             var game = new Game(board, player);
 
-            game.MoveLeft();
+            var valid = game.MoveLeft();
 
+            Assert.IsTrue(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -72,8 +75,9 @@ namespace Test
 
             var game = new Game(board, player);
 
-            game.MoveRight();
+            var valid = game.MoveRight();
 
+            Assert.IsTrue(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -88,8 +92,26 @@ namespace Test
 
             var game = new Game(board, player);
 
-            game.MoveRight();
+            var valid = game.MoveRight();
 
+            Assert.IsFalse(valid);
+            Assert.That(player.CurrentPosition, Is.EqualTo(playerStart));
+        }
+
+        [Test]
+        public void a_player_cannot_move_to_a_space_less_than_start_space()
+        {
+            var squares = new List<Square>() { new Square(new Position(1, 1)) };
+            var board = new Board(squares);
+
+            var playerStart = new Position(1, 1);
+            var player = new Player(playerStart);
+
+            var game = new Game(board, player);
+
+            var valid = game.MoveLeft();
+
+            Assert.IsFalse(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(playerStart));
         }
     }
