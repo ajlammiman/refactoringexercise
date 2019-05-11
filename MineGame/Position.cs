@@ -16,6 +16,5 @@
             return that is Position position && X == position.X && Y == position.Y;
         }
 
-        
     }
 }

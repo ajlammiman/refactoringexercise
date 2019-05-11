@@ -4,10 +4,10 @@ namespace MineGame
 {
     public interface IGame
     {
-        void MoveDown();
-        void MoveLeft();
-        void MoveRight();
-        void MoveUp();
+        bool MoveDown();
+        bool MoveLeft();
+        bool MoveRight();
+        bool MoveUp();
     }
 
     public class Game : IGame
@@ -22,33 +22,53 @@ namespace MineGame
             this.player = player;
         }
 
-        public void MoveUp()
+        public bool MoveUp()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y + 1);
-            player.ChangePosition(newPosition);
+            var validMove = board.IsValidMove(newPosition);
+
+            if (validMove)
+                player.ChangePosition(newPosition);
+
+            return validMove;
         }
 
 
-        public void MoveDown()
+        public bool MoveDown()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y - 1);
-            player.ChangePosition(newPosition);
+            var validMove = board.IsValidMove(newPosition);
+
+            if (validMove)
+                player.ChangePosition(newPosition);
+
+            return validMove;
         }
 
-        public void MoveLeft()
+        public bool MoveLeft()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
-            player.ChangePosition(newPosition);
+            var validMove = board.IsValidMove(newPosition);
+
+            if (validMove)
+                player.ChangePosition(newPosition);
+
+            return validMove;
         }
 
-        public void MoveRight()
+        public bool MoveRight()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X + 1, currentPosition.Y);
-            player.ChangePosition(newPosition);
+            var validMove = board.IsValidMove(newPosition);
+
+            if (validMove)
+                player.ChangePosition(newPosition);
+
+            return validMove;
         }
     }
 }
