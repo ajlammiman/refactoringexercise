@@ -6,26 +6,25 @@ using System.Collections.Generic;
 namespace Test
 {
     [TestFixture]
-    class GameTetst
+    class GameTest
     {
         [Test]
         public void a_player_can_move_up_one_space()
         {
             var startPosition = new Position(1, 1);
-            var endPosition = new Position(1, 2);
-            var squares = new List<Square>() { new Square(new Position(1, 1)), new Square(new Position(1, 2)) };
-
-            var board = new Board(squares);
             var player = new Player(startPosition);
+
+            var squares = new List<Square>() { new Square(new Position(1, 1)), new Square(new Position(1, 2)) };
+            var board = new Board(squares);
 
             var game = new Game(board, player);
             
             var valid = game.MoveUp();
+            var endPosition = new Position(1, 2);
 
             Assert.IsTrue(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
-
 
         [Test]
         public void a_player_can_move_down_one_space()
