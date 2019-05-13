@@ -8,7 +8,7 @@ namespace Test
     class SquareGeneratorTest
     {
         [Test]
-        public void squares_created_with_number_of_y_axis_squares_equal_to_seed_value()
+        public void number_of_y_axis_squares_equal_to_seed_value()
         {
             var yLength = 8;
             var squares = SquareGenerator.Generate(1, yLength);
@@ -17,7 +17,7 @@ namespace Test
         }
 
         [Test]
-        public void squares_created_with_number_of_x_axis_squares_equal_to_seed_value()
+        public void number_of_x_axis_squares_equal_to_seed_value()
         {
             var xLength = 8;
             var squares = SquareGenerator.Generate(xLength, 1);

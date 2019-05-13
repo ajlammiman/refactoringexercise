@@ -10,27 +10,22 @@ namespace Test
         [Test]
         public void board_confirms_if_move_is_valid()
         {
-            var squares = SquareGenerator.Generate(1, 2);
-            
-            var board = new Board(squares);
-
-            Position position = new Position(1,2);
-            var valid = board.IsValidMove(position);
-
-            Assert.IsTrue(valid);
+            Assert.IsTrue(MakeAMove(1,2, new Position(1,2)));
         }
 
         [Test]
         public void board_confirms_if_move_is_invalid()
         {
-            var squares = SquareGenerator.Generate(2, 1);
+            Assert.IsFalse(MakeAMove(2, 1, new Position(3, 3)));
+        }
+
+        private bool MakeAMove(int xLength, int yLength, Position checkPosition)
+        {
+            var squares = SquareGenerator.Generate(xLength, yLength);
 
             var board = new Board(squares);
 
-            Position position = new Position(3, 3);
-            var valid = board.IsValidMove(position);
-
-            Assert.IsFalse(valid);
+            return board.IsValidMove(checkPosition);
         }
 
         [Test]
