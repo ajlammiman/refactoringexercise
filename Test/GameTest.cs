@@ -14,7 +14,7 @@ namespace Test
             var startPosition = new Position(1, 1);
             var player = new Player(startPosition);
 
-            var squares = SquareGenerator.Generate(1,2);
+            var squares = GridBuilder.Build(1,2);
             var board = new Board(squares);
 
             var game = new Game(board, player);
@@ -31,7 +31,7 @@ namespace Test
         {
             var startPosition = new Position(1, 2);
             var endPosition = new Position(1, 1);
-            var squares = SquareGenerator.Generate(1, 2);
+            var squares = GridBuilder.Build(1, 2);
 
             var board = new Board(squares);
             var player = new Player(startPosition);
@@ -49,7 +49,7 @@ namespace Test
         {
             var startPosition = new Position(2, 1);
             var endPosition = new Position(1, 1);
-            var squares = SquareGenerator.Generate(2, 1);
+            var squares = GridBuilder.Build(2, 1);
 
             var board = new Board(squares);
             var player = new Player(startPosition);
@@ -67,7 +67,7 @@ namespace Test
         {
             var startPosition = new Position(1, 1);
             var endPosition = new Position(2, 1);
-            var squares = SquareGenerator.Generate(2, 1);
+            var squares = GridBuilder.Build(2, 1);
 
             var board = new Board(squares);
             var player = new Player(startPosition);
@@ -83,7 +83,7 @@ namespace Test
         [Test]
         public void a_player_cannot_move_off_the_board()
         {
-            var squares = SquareGenerator.Generate(1, 1);
+            var squares = GridBuilder.Build(1, 1);
             var board = new Board(squares);
 
             var playerStart = new Position(1, 1);
@@ -100,7 +100,7 @@ namespace Test
         [Test]
         public void a_player_cannot_move_to_a_space_less_than_start_space()
         {
-            var squares = SquareGenerator.Generate(1, 1);
+            var squares = GridBuilder.Build(1, 1);
             var board = new Board(squares);
 
             var playerStart = new Position(1, 1);

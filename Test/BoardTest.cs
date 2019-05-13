@@ -21,7 +21,7 @@ namespace Test
 
         private bool MakeAMove(int xLength, int yLength, Position checkPosition)
         {
-            var squares = SquareGenerator.Generate(xLength, yLength);
+            var squares = GridBuilder.Build(xLength, yLength);
 
             var board = new Board(squares);
 
