@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SquareGeneratorTest.cs" />
     <Compile Include="BoardTest.cs" />
     <Compile Include="GameTest.cs" />
     <Compile Include="PlayerTest.cs" />
