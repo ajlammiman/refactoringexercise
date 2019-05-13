@@ -10,7 +10,8 @@ namespace Test
         [Test]
         public void board_confirms_if_move_is_valid()
         {
-            var squares = new List<Square>() { new Square(new Position(1,1)), new Square(new Position(1,2)) };
+            var squares = SquareGenerator.Generate(1, 2);
+            
             var board = new Board(squares);
 
             Position position = new Position(1,2);
@@ -22,7 +23,8 @@ namespace Test
         [Test]
         public void board_confirms_if_move_is_invalid()
         {
-            var squares = new List<Square>() { new Square(new Position(1, 1)), new Square(new Position(1, 2)) };
+            var squares = SquareGenerator.Generate(2, 1);
+
             var board = new Board(squares);
 
             Position position = new Position(3, 3);
@@ -39,6 +41,7 @@ namespace Test
             try
             {
                 var squares = new List<Square>() { new Square(new Position(1, 1)), new Square(new Position(5, 1)), new Square(new Position(3, 1)) };
+                
                 var board = new Board(squares);
             }
             catch(System.Exception e)
