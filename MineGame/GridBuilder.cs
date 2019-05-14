@@ -7,6 +7,9 @@ namespace MineGame
     {
         public static Square[] Build(int xLength, int yLength, int mines = 0)
         {
+            if (xLength <= 0 || yLength <= 0)
+                throw new System.Exception("X and Y values must be greater than 0.");
+
             var squares = new List<Square>();
 
             for (int y = 1; y <= yLength; y++)
