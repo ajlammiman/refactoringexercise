@@ -7,6 +7,7 @@ namespace MineGame
     public interface IBoard
     {
         bool IsValidMove(Position position);
+        bool HasMine(Position newPosition);
     }
 
     public class Board : IBoard
@@ -47,6 +48,11 @@ namespace MineGame
         public bool IsValidMove(Position position)
         {
             return Squares.Any(s => s.Position.Equals(position));
+        }
+
+        public bool HasMine(Position newPosition)
+        {
+            return Squares.Any(s => s.Position.X == newPosition.Y && s.Position.Y == newPosition.Y && s.Position.IsMined);
         }
     }
 }

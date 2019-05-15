@@ -8,17 +8,19 @@ namespace Test
     [TestFixture]
     class GameTest
     {
+        private const int lives = 1;
+
         [Test]
         public void a_player_can_move_up_one_space()
         {
             var startPosition = new Position(1, 1);
-            var player = new Player(startPosition);
+            var player = new Player(startPosition, lives);
 
-            var squares = GridBuilder.Build(1,2);
+            var squares = GridBuilder.Build(1, 2);
             var board = new Board(squares);
 
             var game = new Game(board, player);
-            
+
             var valid = game.MoveUp();
             var endPosition = new Position(1, 2);
 
@@ -34,7 +36,7 @@ namespace Test
             var squares = GridBuilder.Build(1, 2);
 
             var board = new Board(squares);
-            var player = new Player(startPosition);
+            var player = new Player(startPosition, lives);
 
             var game = new Game(board, player);
 
@@ -52,7 +54,7 @@ namespace Test
             var squares = GridBuilder.Build(2, 1);
 
             var board = new Board(squares);
-            var player = new Player(startPosition);
+            var player = new Player(startPosition, lives);
 
             var game = new Game(board, player);
 
@@ -70,7 +72,7 @@ namespace Test
             var squares = GridBuilder.Build(2, 1);
 
             var board = new Board(squares);
-            var player = new Player(startPosition);
+            var player = new Player(startPosition, lives);
 
             var game = new Game(board, player);
 
@@ -87,7 +89,7 @@ namespace Test
             var board = new Board(squares);
 
             var playerStart = new Position(1, 1);
-            var player = new Player(playerStart);
+            var player = new Player(playerStart, lives);
 
             var game = new Game(board, player);
 
@@ -104,7 +106,7 @@ namespace Test
             var board = new Board(squares);
 
             var playerStart = new Position(1, 1);
-            var player = new Player(playerStart);
+            var player = new Player(playerStart, lives);
 
             var game = new Game(board, player);
 
@@ -112,6 +114,23 @@ namespace Test
 
             Assert.IsFalse(valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(playerStart));
+        }
+
+        [Test]
+        public void a_player_moves_to_mined_square_loses_a_life()
+        {
+            var squares = GridBuilder.Build(2, 1, 2);
+            var board = new Board(squares);
+
+            var playerStart = new Position(1, 1);
+            
+            var player = new Player(playerStart,lives);
+
+            var game = new Game(board, player);
+
+            game.MoveRight();
+
+            Assert.That(game.LivesLeft, Is.EqualTo(lives - 1));
         }
     }
 }

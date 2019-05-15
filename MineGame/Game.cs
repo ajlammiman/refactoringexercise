@@ -8,6 +8,7 @@ namespace MineGame
         bool MoveLeft();
         bool MoveRight();
         bool MoveUp();
+        int LivesLeft { get; }
     }
 
     public class Game : IGame
@@ -26,43 +27,43 @@ namespace MineGame
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y + 1);
-            var validMove = board.IsValidMove(newPosition);
 
-            if (validMove)
-                player.ChangePosition(newPosition);
+            CheckMined(newPosition);
 
-            return validMove;
+            return MakeAMove(newPosition);
         }
-
 
         public bool MoveDown()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y - 1);
-            var validMove = board.IsValidMove(newPosition);
 
-            if (validMove)
-                player.ChangePosition(newPosition);
+            CheckMined(newPosition);
 
-            return validMove;
+            return MakeAMove(newPosition);
         }
 
         public bool MoveLeft()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
-            var validMove = board.IsValidMove(newPosition);
 
-            if (validMove)
-                player.ChangePosition(newPosition);
+            CheckMined(newPosition);
 
-            return validMove;
+            return MakeAMove(newPosition);
         }
 
         public bool MoveRight()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X + 1, currentPosition.Y);
+            CheckMined(newPosition);
+
+            return MakeAMove(newPosition);
+        }
+
+        private bool MakeAMove(Position newPosition)
+        {
             var validMove = board.IsValidMove(newPosition);
 
             if (validMove)
@@ -70,5 +71,13 @@ namespace MineGame
 
             return validMove;
         }
+
+        private void CheckMined(Position newPosition)
+        {
+            if (board.HasMine(newPosition))
+                player.LoseALife();
+        }
+
+        public int LivesLeft => player.Lives;
     }
 }
