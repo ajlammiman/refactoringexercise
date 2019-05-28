@@ -10,8 +10,6 @@ namespace Test
     {
         private const int YLength = 8;
         private const int XLength = 8;
-        private const int Mines = 8;
-        private const int mines = 9;
 
         [Test]
         public void y_axis_squares_in_grid_equal_to_seed_value()
@@ -45,22 +43,6 @@ namespace Test
             Assert.That(message, Is.EqualTo("X and Y values must be greater than 0."));
         }
 
-        [Test]
-        public void number_of_mines_on_grid_equals_seed_value()
-        {
-            var squares = GridBuilder.Build(XLength, YLength, mines);
-
-            Assert.That(squares.Where(s => s.Position.IsMined).Count(), Is.EqualTo(mines));
-        }
-
-        [Ignore("")]
-        [Test]
-        public void mines_are_created_within_grid_bounds()
-        {
-            var minePositions = MineBuilder.Build(XLength, YLength, mines);
-            var squares = GridBuilder.Build(XLength, YLength, mines);
-
-            Assert.IsTrue(squares.All(s => minePositions.Contains(s.Position)));
-        }
+        
     }
 }

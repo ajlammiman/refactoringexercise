@@ -61,6 +61,7 @@
     <Compile Include="GridBuilderTest.cs" />
     <Compile Include="BoardTest.cs" />
     <Compile Include="GameTest.cs" />
+    <Compile Include="MineBuilderTest.cs" />
     <Compile Include="PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
