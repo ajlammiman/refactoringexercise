@@ -43,6 +43,21 @@ namespace Test
             Assert.That(message, Is.EqualTo("X and Y values must be greater than 0."));
         }
 
+        [Test]
+        public void cannot_create_more_mines_than_squares_on_the_grid()
+        {
+            string message = "";
+            try
+            {
+                GridBuilder.Build(2, 2, 9);
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+            }
+
+            Assert.That(message, Is.EqualTo("There are more mines than squares on the grid."));
+        }
         
     }
 }
