@@ -42,3 +42,6 @@ C:\Projects\refactoringexercise\Test\obj\Debug\Test.csproj.CoreCompileInputs.cac
 C:\Projects\refactoringexercise\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Projects\refactoringexercise\Test\obj\Debug\Test.dll
 C:\Projects\refactoringexercise\Test\obj\Debug\Test.pdb
+C:\Projects\refactoringexercise\Test\bin\MineGameConsole.exe
+C:\Projects\refactoringexercise\Test\bin\MineGameConsole.pdb
+C:\Projects\refactoringexercise\Test\bin\MineGameConsole.exe.config

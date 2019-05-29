@@ -58,17 +58,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GridBuilderTest.cs" />
-    <Compile Include="BoardTest.cs" />
-    <Compile Include="GameTest.cs" />
-    <Compile Include="MineBuilderTest.cs" />
-    <Compile Include="PlayerTest.cs" />
+    <Compile Include="Integration\ConsoleGameTest.cs" />
+    <Compile Include="Unit\GridBuilderTest.cs" />
+    <Compile Include="Unit\BoardTest.cs" />
+    <Compile Include="Unit\GameTest.cs" />
+    <Compile Include="Unit\MineBuilderTest.cs" />
+    <Compile Include="Unit\PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MineGame\MineGame.csproj">
       <Project>{7e70bc79-58bc-456c-bd48-0ca8d0c8cfbf}</Project>
       <Name>MineGame</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RefactorKata\MineGameConsole.csproj">
+      <Project>{d267b1c6-0e76-4a2b-916c-8417ff42a5b1}</Project>
+      <Name>MineGameConsole</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
