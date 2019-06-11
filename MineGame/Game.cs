@@ -78,6 +78,7 @@ namespace MineGame
                 player.LoseALife();
         }
 
+        
         public int LivesLeft => player.Lives;
     }
 }
