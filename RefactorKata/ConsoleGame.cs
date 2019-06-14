@@ -18,9 +18,17 @@ namespace MineGameConsole
 
         public string MoveRight()
         {
-            var valid = game.MoveRight();
+            var moveState = game.MoveRight();
 
-            return (valid) ? "You have moved one square right, your new position is Square 1,2" : "This move is not allowed, you will move off the board.";
+            switch (moveState)
+            {
+                case MoveState.Invalid:
+                    return "This move is not allowed, you will move off the board.";
+                case MoveState.Mined:
+                    return $"You have moved one square right and hit a mine, your new position is Square 1,2 and your number of lives is {game.LivesLeft}";
+                default:
+                    return $"You have moved one square right, your new position is Square {game.PlayerPosition.X},{game.PlayerPosition.Y}";
+            }
         }
     }
 }

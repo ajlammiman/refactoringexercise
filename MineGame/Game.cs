@@ -2,13 +2,21 @@
 
 namespace MineGame
 {
+    public enum MoveState
+    {
+        Valid,
+        Invalid,
+        Mined
+    }
+
     public interface IGame
     {
-        bool MoveDown();
-        bool MoveLeft();
-        bool MoveRight();
-        bool MoveUp();
+        MoveState MoveDown();
+        MoveState MoveLeft();
+        MoveState MoveRight();
+        MoveState MoveUp();
         int LivesLeft { get; }
+        Position PlayerPosition { get; }
     }
 
     public class Game : IGame
@@ -23,7 +31,7 @@ namespace MineGame
             this.player = player;
         }
 
-        public bool MoveUp()
+        public MoveState MoveUp()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y + 1);
@@ -33,7 +41,7 @@ namespace MineGame
             return MakeAMove(newPosition);
         }
 
-        public bool MoveDown()
+        public MoveState MoveDown()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y - 1);
@@ -43,7 +51,7 @@ namespace MineGame
             return MakeAMove(newPosition);
         }
 
-        public bool MoveLeft()
+        public MoveState MoveLeft()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
@@ -53,7 +61,7 @@ namespace MineGame
             return MakeAMove(newPosition);
         }
 
-        public bool MoveRight()
+        public MoveState MoveRight()
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X + 1, currentPosition.Y);
@@ -62,14 +70,15 @@ namespace MineGame
             return MakeAMove(newPosition);
         }
 
-        private bool MakeAMove(Position newPosition)
+        private MoveState MakeAMove(Position newPosition)
         {
             var validMove = board.IsValidMove(newPosition);
 
             if (validMove)
                 player.ChangePosition(newPosition);
 
-            return validMove;
+
+            return (validMove) ? MoveState.Valid : MoveState.Invalid;
         }
 
         private void CheckMined(Position newPosition)
@@ -80,5 +89,7 @@ namespace MineGame
 
         
         public int LivesLeft => player.Lives;
+
+        public Position PlayerPosition => player.CurrentPosition;
     }
 }

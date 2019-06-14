@@ -29,7 +29,8 @@ namespace Test
         public void when_making_a_move_right_right_move_message_is_displayed()
         {
             var game = Substitute.For<IGame>();
-            game.MoveRight().Returns(true);
+            game.MoveRight().Returns(MoveState.Valid);
+            game.PlayerPosition.Returns(new Position(1, 2));
 
             consoleGame = new ConsoleGame(game);
 
@@ -41,7 +42,7 @@ namespace Test
         public void when_making_an_invalid_move_right_then_failure_message_is_displayed()
         {
             var game = Substitute.For<IGame>();
-            game.MoveRight().Returns(false);
+            game.MoveRight().Returns(MoveState.Invalid);
 
             consoleGame = new ConsoleGame(game);
 
@@ -49,12 +50,12 @@ namespace Test
             Assert.AreEqual(rightMessage, expectedFailureMessage);
         }
 
-        [Ignore("")]
-        [Test]
+         [Test]
         public void when_making_a_move_to_a_square_with_a_mines_a_life_is_lost()
         {
             var game = Substitute.For<IGame>();
-            game.MoveRight().Returns(true);
+            game.MoveRight().Returns(MoveState.Mined);
+            game.LivesLeft.Returns(1);
 
             consoleGame = new ConsoleGame(game);
 

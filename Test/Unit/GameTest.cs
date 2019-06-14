@@ -24,7 +24,7 @@ namespace Test
             var valid = game.MoveUp();
             var endPosition = new Position(1, 2);
 
-            Assert.IsTrue(valid);
+            Assert.AreEqual(valid, MoveState.Valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -42,7 +42,7 @@ namespace Test
 
             var valid = game.MoveDown();
 
-            Assert.IsTrue(valid);
+            Assert.AreEqual(valid, MoveState.Valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -60,7 +60,7 @@ namespace Test
 
             var valid = game.MoveLeft();
 
-            Assert.IsTrue(valid);
+            Assert.AreEqual(valid, MoveState.Valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -78,7 +78,7 @@ namespace Test
 
             var valid = game.MoveRight();
 
-            Assert.IsTrue(valid);
+            Assert.AreEqual(valid, MoveState.Valid);
             Assert.That(player.CurrentPosition, Is.EqualTo(endPosition));
         }
 
@@ -95,7 +95,7 @@ namespace Test
 
             var valid = game.MoveRight();
 
-            Assert.IsFalse(valid);
+            Assert.AreEqual(valid, MoveState.Invalid);
             Assert.That(player.CurrentPosition, Is.EqualTo(playerStart));
         }
 
@@ -112,7 +112,7 @@ namespace Test
 
             var valid = game.MoveLeft();
 
-            Assert.IsFalse(valid);
+            Assert.AreEqual(valid, MoveState.Invalid);
             Assert.That(player.CurrentPosition, Is.EqualTo(playerStart));
         }
 
