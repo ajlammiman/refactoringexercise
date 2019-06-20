@@ -9,3 +9,4 @@ C:\Projects\refactoringexercise\MineGame\bin\MineGame.pdb
 C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.csproj.CoreCompileInputs.cache
 C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.dll
 C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.pdb
+C:\Projects\refactoringexercise\MineGame\obj\Debug\MineGame.csprojAssemblyReference.cache
