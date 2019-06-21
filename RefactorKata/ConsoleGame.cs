@@ -38,6 +38,8 @@ namespace MineGameConsole
             return MoveMessage(moveState, "right");
         }
 
+        
+
         private string MoveMessage(MoveState moveState, string direction)
         {
             var playerPosition = $"Square {game.PlayerPosition.X},{game.PlayerPosition.Y}";
@@ -48,6 +50,8 @@ namespace MineGameConsole
                     return "This move is not allowed, you will move off the board.";
                 case MoveState.Mined:
                     return (game.LivesLeft > 0) ? $"You have moved one square {direction} and hit a mine, your new position is {playerPosition} and your number of lives is {game.LivesLeft}" : "You have lost your last life, GAME OVER!";
+                case MoveState.Completed:
+                    return "Game completed. Congratulations, you've won!";
                 default:
                     return $"You have moved one square {direction}, your new position is {playerPosition}";
             }

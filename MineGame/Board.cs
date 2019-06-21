@@ -8,6 +8,7 @@ namespace MineGame
     {
         bool IsValidMove(Position position);
         bool HasMine(Position newPosition);
+        bool IsCompleted(Position position);
     }
 
     public class Board : IBoard
@@ -33,6 +34,11 @@ namespace MineGame
                 ValidateXAxis(squares, ySequence[i]);
             }
 
+        }
+
+        public bool IsCompleted(Position position)
+        {
+            return Squares.Where(s => s.Position.Equals(position)).Single().Completed;
         }
 
         private static void ValidateXAxis(ISquare[] squares, int y)

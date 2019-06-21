@@ -14,7 +14,7 @@ namespace Test
         [Test]
         public void y_axis_squares_in_grid_equal_to_seed_value()
         {
-            var squares = GridBuilder.Build(1, YLength);
+            var squares = GridBuilder.Build(1, YLength, 0, new Position(1, 1));
 
             Assert.That(squares.Select(s => s.Position.Y).Count(), Is.EqualTo(YLength));
         }
@@ -22,7 +22,7 @@ namespace Test
         [Test]
         public void x_axis_squares_in_grid_equal_to_seed_value()
         {
-            var squares = GridBuilder.Build(XLength, 1);
+            var squares = GridBuilder.Build(XLength, 1, 0, new Position(1, 1));
 
             Assert.That(squares.Select(s => s.Position.X).Count(), Is.EqualTo(XLength));
         }
@@ -33,7 +33,7 @@ namespace Test
             string message = "";
             try
             {
-                GridBuilder.Build(0, 0);
+                GridBuilder.Build(0, 0, 0, new Position(0, 0));
             }
             catch(Exception e)
             {
@@ -49,7 +49,7 @@ namespace Test
             string message = "";
             try
             {
-                GridBuilder.Build(2, 2, 9);
+                GridBuilder.Build(2, 2, 9, new Position(1, 1));
             }
             catch (Exception e)
             {
@@ -58,6 +58,14 @@ namespace Test
 
             Assert.That(message, Is.EqualTo("There are more mines than squares on the grid."));
         }
-        
+
+        [Test]
+        public void grid_contains_a_game_completed_square()
+        {
+            var completedPosition = new Position(1, 1);
+            var squares = GridBuilder.Build(1, 1, 0, completedPosition);
+
+            Assert.That(squares.Where(s => s.Position.Equals(completedPosition)).Single().Completed, Is.True);
+        }
     }
 }

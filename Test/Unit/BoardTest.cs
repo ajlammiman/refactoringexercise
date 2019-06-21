@@ -19,14 +19,16 @@ namespace Test
             Assert.IsFalse(MakeAMove(2, 1, new Position(3, 3)));
         }
 
-        private bool MakeAMove(int xLength, int yLength, Position checkPosition)
+        [Test]
+        public void board_knows_if_move_completes_game()
         {
-            var squares = GridBuilder.Build(xLength, yLength);
+            var squares = GridBuilder.Build(1, 1, 0, new Position(1, 1));
 
             var board = new Board(squares);
 
-            return board.IsValidMove(checkPosition);
+            Assert.IsTrue(board.IsCompleted(new Position(1,1)));
         }
+
 
         [Test]
         public void squares_on_board_must_follow_numerical_sequence_on_x_axis()
@@ -61,6 +63,15 @@ namespace Test
                 message = e.Message;
             }
             Assert.AreEqual("Board cannot be created, y axis squares not in sequence", message);
+        }
+
+        private bool MakeAMove(int xLength, int yLength, Position checkPosition)
+        {
+            var squares = GridBuilder.Build(xLength, yLength, 0, new Position(1, 1));
+
+            var board = new Board(squares);
+
+            return board.IsValidMove(checkPosition);
         }
     }
 }

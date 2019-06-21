@@ -6,7 +6,8 @@ namespace MineGame
     {
         Valid,
         Invalid,
-        Mined
+        Mined,
+        Completed
     }
 
     public interface IGame
@@ -73,12 +74,15 @@ namespace MineGame
         private MoveState MakeAMove(Position newPosition)
         {
             var validMove = board.IsValidMove(newPosition);
+            var moveState = (validMove) ? MoveState.Valid : MoveState.Invalid;
 
             if (validMove)
+            {
                 player.ChangePosition(newPosition);
+                moveState = (board.IsCompleted(newPosition)) ? MoveState.Completed : moveState;
+            }
 
-
-            return (validMove) ? MoveState.Valid : MoveState.Invalid;
+            return moveState;
         }
 
         private void CheckMined(Position newPosition)

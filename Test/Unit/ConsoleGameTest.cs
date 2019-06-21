@@ -64,9 +64,7 @@ namespace Test
         [Test]
         public void when_making_an_invalid_move_then_correct_failure_message_is_displayed()
         {
-            var game = Substitute.For<IGame>();
-            game.MoveRight().Returns(MoveState.Invalid);
-            game.PlayerPosition.Returns(new Position(1, 2));
+            var game = GameMock(MoveState.Invalid);
 
             consoleGame = new ConsoleGame(game);
 
@@ -77,10 +75,7 @@ namespace Test
          [Test]
         public void when_making_a_move_to_a_square_with_a_mines_a_life_is_lost()
         {
-            var game = Substitute.For<IGame>();
-            game.MoveRight().Returns(MoveState.Mined);
-            game.LivesLeft.Returns(1);
-            game.PlayerPosition.Returns(new Position(1, 2));
+            var game = GameMock(MoveState.Mined);
 
             consoleGame = new ConsoleGame(game);
 
@@ -92,15 +87,33 @@ namespace Test
         [Test]
         public void when_last_life_is_lost_game_is_over()
         {
-            var game = Substitute.For<IGame>();
-            game.MoveRight().Returns(MoveState.Mined);
-            game.LivesLeft.Returns(0);
-            game.PlayerPosition.Returns(new Position(1, 2));
+            var game = GameMock(MoveState.Mined, 0);
 
             consoleGame = new ConsoleGame(game);
             string message = consoleGame.MoveRight();
 
             Assert.AreEqual(message, "You have lost your last life, GAME OVER!");
+        }
+
+        [Test]
+        public void when_destination_reached_game_is_won()
+        {
+            var game = GameMock(MoveState.Completed);
+
+            consoleGame = new ConsoleGame(game);
+            string message = consoleGame.MoveRight();
+
+            Assert.AreEqual(message, "Game completed. Congratulations, you've won!");
+
+        }
+
+        private IGame GameMock(MoveState moveState, int lives = 1)
+        {
+            var game = Substitute.For<IGame>();
+            game.MoveRight().Returns(moveState);
+            game.LivesLeft.Returns(lives);
+            game.PlayerPosition.Returns(new Position(1, 2));
+            return game;
         }
     }
 

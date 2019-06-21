@@ -5,7 +5,7 @@ namespace MineGame
 {
     public static class GridBuilder
     {
-        public static Square[] Build(int xLength, int yLength, int mines = 0)
+        public static Square[] Build(int xLength, int yLength, int mines, Position completedPosition)
         {
             Validate(xLength, yLength, mines);
 
@@ -16,8 +16,9 @@ namespace MineGame
                 for (int x = 1; x <= xLength; x++)
                 {
                     var isMined = minePositions.Where(m => m.Equals(new Position(x, y, true))).Any();
+                    var isCompleted = (completedPosition.X == x && completedPosition.Y == y) ? true : false;
 
-                    squares.Add(new Square(new Position(x, y, isMined)));
+                    squares.Add(new Square(new Position(x, y, isMined), isCompleted));
                 }
             return squares.ToArray();
         }
