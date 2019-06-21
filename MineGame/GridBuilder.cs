@@ -7,7 +7,7 @@ namespace MineGame
     {
         public static Square[] Build(int xLength, int yLength, int mines, Position completedPosition)
         {
-            Validate(xLength, yLength, mines);
+            Validate(xLength, yLength, mines, completedPosition);
 
             var minePositions = MineBuilder.Generate(xLength, yLength, mines);
             var squares = new List<Square>();
@@ -23,13 +23,16 @@ namespace MineGame
             return squares.ToArray();
         }
 
-        private static void Validate(int xLength, int yLength, int mines)
+        private static void Validate(int xLength, int yLength, int mines, Position completedPosition)
         {
             if (xLength <= 0 || yLength <= 0)
                 throw new System.Exception("X and Y values must be greater than 0.");
 
             if ((xLength * yLength) < mines)
                 throw new System.Exception("There are more mines than squares on the grid.");
+
+            if (completedPosition.X > xLength || completedPosition.Y > yLength)
+                throw new System.Exception("The completed square must be valid.");
 
         }
     }

@@ -51,7 +51,7 @@ namespace Test
         {
             var startPosition = new Position(2, 1);
             var endPosition = new Position(1, 1);
-            var squares = GridBuilder.Build(2, 1, 0, new Position(1, 2));
+            var squares = GridBuilder.Build(2, 1, 0, new Position(2, 1));
 
             var board = new Board(squares);
             var player = new Player(startPosition, lives);

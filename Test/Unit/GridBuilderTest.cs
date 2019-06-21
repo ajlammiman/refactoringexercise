@@ -67,5 +67,22 @@ namespace Test
 
             Assert.That(squares.Where(s => s.Position.Equals(completedPosition)).Single().Completed, Is.True);
         }
+
+        [Test]
+        public void completed_square_cannot_be_off_the_board()
+        {
+            string message = "";
+            try
+            {
+                GridBuilder.Build(1, 1, 0, new Position(2, 2));
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+            }
+
+            Assert.That(message, Is.EqualTo("The completed square must be valid."));
+        }
+
     }
 }
