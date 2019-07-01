@@ -23,8 +23,8 @@ namespace MineGame
 
         private void ValidateBoard(ISquare[] squares)
         {
-            var ySequence = squares.Select(s => s.Position.Y).ToArray();
-            var checkSequence = Enumerable.Range(1, ySequence.Max()).ToArray();
+            var ySequence = squares.Select(s => s.Position.Y).Distinct().ToArray();
+            var checkSequence = Enumerable.Range(1, ySequence.Count()).ToArray();
 
             for (int i = 0; i < ySequence.Max(); i++)
             {
@@ -38,13 +38,13 @@ namespace MineGame
 
         public bool IsCompleted(Position position)
         {
-            return Squares.Where(s => s.Position.Equals(position)).Single().Completed;
+            return Squares.Where(s => s.Position.X == position.X && s.Position.Y == position.Y).Single().Completed;
         }
 
         private static void ValidateXAxis(ISquare[] squares, int y)
         {
-            var xSequence = squares.Where(s => s.Position.Y == y).Select(s => s.Position.X).ToArray();
-            var checkSequence = Enumerable.Range(1, xSequence.Max()).ToArray();
+            var xSequence = squares.Where(s => s.Position.Y == y).Select(s => s.Position.X).Distinct().ToArray();
+            var checkSequence = Enumerable.Range(1, xSequence.Count()).ToArray();
 
             for (int i = 0; i < xSequence.Max(); i++)
                 if (i > xSequence.Length || xSequence[i] != checkSequence[i])
@@ -53,12 +53,12 @@ namespace MineGame
 
         public bool IsValidMove(Position position)
         {
-            return Squares.Any(s => s.Position.Equals(position));
+            return Squares.Any(s => s.Position.X == position.X && s.Position.Y == position.Y);
         }
 
         public bool HasMine(Position newPosition)
         {
-            return Squares.Any(s => s.Position.X == newPosition.Y && s.Position.Y == newPosition.Y && s.Position.IsMined);
+            return Squares.Any(s => s.Position.X == newPosition.X && s.Position.Y == newPosition.Y && s.Position.IsMined);
         }
     }
 }

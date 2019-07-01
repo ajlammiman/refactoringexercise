@@ -55,7 +55,7 @@ namespace Test
 
             try
             {
-                var squares = new List<Square>() { new Square(new Position(1, 1)), new Square(new Position(2, 1)), new Square(new Position(1, 2)), new Square(new Position(2, 3)) };
+                var squares = new List<Square>() { new Square(new Position(1, 1)), new Square(new Position(2, 1)), new Square(new Position(3, 3))};
                 var board = new Board(squares);
             }
             catch (System.Exception e)
