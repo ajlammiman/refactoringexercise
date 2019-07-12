@@ -15,10 +15,10 @@ namespace MineGame
             for (int y = 1; y <= yLength; y++)
                 for (int x = 1; x <= xLength; x++)
                 {
-                    var isMined = minePositions.Where(m => m.Equals(new Position(x, y, true))).Any();
+                    var isMined = minePositions.Where(m => m.Equals(new Position(x, y))).Any();
                     var isCompleted = (completedPosition.X == x && completedPosition.Y == y) ? true : false;
 
-                    squares.Add(new Square(new Position(x, y, isMined), isCompleted));
+                    squares.Add(new Square(new Position(x, y), isCompleted, isMined));
                 }
             return squares.ToArray();
         }

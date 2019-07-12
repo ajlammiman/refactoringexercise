@@ -37,8 +37,6 @@ namespace MineGame
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y + 1);
 
-            CheckMined(newPosition);
-
             return MakeAMove(newPosition);
         }
 
@@ -46,8 +44,6 @@ namespace MineGame
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X, currentPosition.Y - 1);
-
-            CheckMined(newPosition);
 
             return MakeAMove(newPosition);
         }
@@ -57,8 +53,6 @@ namespace MineGame
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
 
-            CheckMined(newPosition);
-
             return MakeAMove(newPosition);
         }
 
@@ -66,34 +60,46 @@ namespace MineGame
         {
             var currentPosition = player.CurrentPosition;
             var newPosition = new Position(currentPosition.X + 1, currentPosition.Y);
-            CheckMined(newPosition);
 
             return MakeAMove(newPosition);
         }
 
-        private MoveState MakeAMove(Position newPosition)
-        {
-            var validMove = board.IsValidMove(newPosition);
-            var moveState = (validMove) ? MoveState.Valid : MoveState.Invalid;
+        private MoveState MakeAMove(Position newPosition) {
+            
+            var moveState = CalculateMoveState(newPosition);
 
-            if (validMove)
-            {
+            if (moveState == MoveState.Valid || moveState == MoveState.Mined)
                 player.ChangePosition(newPosition);
-                moveState = (board.IsCompleted(newPosition)) ? MoveState.Completed : moveState;
-            }
+
+            if (moveState == MoveState.Mined)
+                LoseALife();
 
             return moveState;
         }
 
-        private void CheckMined(Position newPosition)
+        private MoveState CalculateMoveState(Position newPosition)
         {
-            if (board.HasMine(newPosition))
-                player.LoseALife();
+            var moveState = MoveState.Invalid;
+
+            var validMove = board.IsValidMove(newPosition);
+            var mined = board.HasMine(newPosition);
+
+            if (validMove && !mined)
+                moveState = MoveState.Valid;
+            else if (mined)
+                moveState = MoveState.Mined;
+            
+            return moveState;
         }
 
-        
+        private void LoseALife() => player.LoseALife();
+
+
         public int LivesLeft => player.Lives;
 
         public Position PlayerPosition => player.CurrentPosition;
+
+        public bool Completed() => board.IsCompleted(player.CurrentPosition);
+        
     }
 }

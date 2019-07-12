@@ -25,7 +25,7 @@ namespace MineGame
             for (int y = 1; y <= yLength; y++)
                 for (int x = 1; x <= xLength; x++)
                 {
-                    positions.Add(positionCount, new Position(x, y, true));
+                    positions.Add(positionCount, new Position(x, y));
                     positionCount++;
                 }
 

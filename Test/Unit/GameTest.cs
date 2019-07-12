@@ -130,7 +130,7 @@ namespace Test
 
             var move = game.MoveRight();
 
-            Assert.AreEqual(move, MoveState.Invalid);
+            Assert.AreEqual(MoveState.Mined, move);
             Assert.That(game.LivesLeft, Is.EqualTo(lives - 1));
         }
 
@@ -146,9 +146,9 @@ namespace Test
 
             var game = new Game(board, player);
 
-            var move = game.MoveRight();
+            game.MoveRight();
 
-            Assert.AreEqual(move, MoveState.Completed);
+            Assert.AreEqual(true, game.Completed());
         }
     }
 }

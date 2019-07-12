@@ -53,12 +53,12 @@ namespace MineGame
 
         public bool IsValidMove(Position position)
         {
-            return Squares.Any(s => s.Position.X == position.X && s.Position.Y == position.Y);
+            return Squares.Any(s => s.Position.Equals(position));
         }
 
         public bool HasMine(Position newPosition)
         {
-            return Squares.Any(s => s.Position.X == newPosition.X && s.Position.Y == newPosition.Y && s.Position.IsMined);
+            return Squares.Any(s => s.Position.Equals(newPosition) && s.IsMined);
         }
     }
 }

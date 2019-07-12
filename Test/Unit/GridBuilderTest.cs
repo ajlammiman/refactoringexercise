@@ -84,5 +84,14 @@ namespace Test
             Assert.That(message, Is.EqualTo("The completed square must be valid."));
         }
 
+        [Test]
+        public void grid_contains_all_mined_squares()
+        {
+            var mines = 3;
+            var squares = GridBuilder.Build(5, 5, mines, new Position(2, 2));
+
+            Assert.That(squares.Where(s => s.IsMined).Count, Is.EqualTo(mines));
+        }
+
     }
 }
