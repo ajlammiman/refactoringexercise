@@ -6,8 +6,7 @@ namespace MineGame
     {
         Valid,
         Invalid,
-        Mined,
-        Completed
+        Mined
     }
 
     public interface IGame
@@ -18,6 +17,7 @@ namespace MineGame
         MoveState MoveUp();
         int LivesLeft { get; }
         Position PlayerPosition { get; }
+        bool Completed();
     }
 
     public class Game : IGame

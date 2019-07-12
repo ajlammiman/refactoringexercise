@@ -98,7 +98,7 @@ namespace Test
         [Test]
         public void when_destination_reached_game_is_won()
         {
-            var game = GameMock(MoveState.Completed);
+            var game = GameMock(MoveState.Valid,1,true);
 
             consoleGame = new ConsoleGame(game);
             string message = consoleGame.MoveRight();
@@ -107,12 +107,13 @@ namespace Test
 
         }
 
-        private IGame GameMock(MoveState moveState, int lives = 1)
+        private IGame GameMock(MoveState moveState, int lives = 1, bool completed = false)
         {
             var game = Substitute.For<IGame>();
             game.MoveRight().Returns(moveState);
             game.LivesLeft.Returns(lives);
             game.PlayerPosition.Returns(new Position(1, 2));
+            game.Completed().Returns(completed);
             return game;
         }
     }
