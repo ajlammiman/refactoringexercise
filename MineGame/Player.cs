@@ -12,7 +12,6 @@ namespace MineGame
     }
     public class Player : IPlayer
     {
-        private Position position;
         public int Lives { get; private set; }
         public Position CurrentPosition { get; private set; }
 

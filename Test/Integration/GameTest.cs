@@ -1,7 +1,5 @@
 ﻿using MineGame;
-using NSubstitute;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace Test
 {
@@ -18,7 +16,7 @@ namespace Test
 
             var squares = GridBuilder.Build(1, 2, 0, new Position(1, 1));
             var board = new Board(squares);
-
+            
             var game = new Game(board, player);
 
             var move = game.MoveUp();
