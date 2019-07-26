@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categorisation\CategorisationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Integration\BoardTest.cs" />
     <Compile Include="Unit\ConsoleGameTest.cs" />
