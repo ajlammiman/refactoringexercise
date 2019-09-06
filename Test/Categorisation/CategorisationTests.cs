@@ -1,67 +1,50 @@
 ﻿using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace Test
 {
     [TestFixture]
     class CategorisationTests
     {
-        private TextWriter normalOutput;
-        private StringWriter consoleTest;
-        private StringBuilder output;
+        private ConsoleTestRunner consoleTestRunner;
 
         [OneTimeSetUp]
         public void intial_setup()
         {
-            string directory = GetDirectory();
-
-            Environment.CurrentDirectory = directory;
-
-            output = new StringBuilder();
-            consoleTest = new StringWriter(output);
-
-            SwitchConsoleOutPut();
+            consoleTestRunner = new ConsoleTestRunner(@"C:\Projects\refactoringexercise\RefactorKata\bin\MineGameConsole.exe");
+            consoleTestRunner.InitialSetUp();
         }
 
         [SetUp]
         public void set_up()
         {
-            output.Remove(0, output.Length);
+            consoleTestRunner.resetTestOutput();
         }
 
         [Test]
         public void console_game_start()
         {
-            //Assert.IsTrue(output.ToString().Contains("Welcome to the Mine Game, try to cross the board without hitting a Mine. W = Up, X = down, A = left and S = right."));
+            consoleTestRunner.StartConsole();
+
+            //var inputSimulator = new InputSimulator();
+            //inputSimulator.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
+
+            var output = consoleTestRunner.WriteOutput();
+
+            Assert.IsTrue(output.ToString().Contains("Welcome to the Mine Game, try to cross the board without hitting a Mine. W = Up, X = down, A = left and S = right."));
         }
 
         [TearDown]
         public void tear_down()
         {
-            normalOutput.Write(output);
+            consoleTestRunner.writeOutputToConsole();
         }
 
         [OneTimeTearDown]
         public void final_tear_down()
         {
-            Console.SetOut(normalOutput);
-        }
-
-        private void SwitchConsoleOutPut()
-        {
-            normalOutput = Console.Out;
-            Console.SetOut(consoleTest);
-        }
-
-        private static string GetDirectory()
-        {
-            string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            string directory = Path.GetDirectoryName(codeBase);
-            if (directory.StartsWith("file:\\"))
-                directory = directory.Substring(6);
-            return directory;
+            consoleTestRunner.resetConolseOutput();
         }
     }
 }
