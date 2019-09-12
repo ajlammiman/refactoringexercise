@@ -13,15 +13,15 @@ namespace MineGame
 
     public class Board : IBoard
     {
-        public ISquare[] Squares { get; private set; }
+        public Square[] Squares { get; private set; }
 
-        public Board(IEnumerable<ISquare> squares)
+        public Board(IEnumerable<Square> squares)
         {
             Squares = squares.ToArray();
             ValidateBoard(Squares);
         }
 
-        private void ValidateBoard(ISquare[] squares)
+        private void ValidateBoard(Square[] squares)
         {
             var ySequence = squares.Select(s => s.Position.Y).Distinct().ToArray();
             var checkSequence = Enumerable.Range(1, ySequence.Count()).ToArray();
@@ -41,7 +41,7 @@ namespace MineGame
             return Squares.Where(s => s.Position.X == position.X && s.Position.Y == position.Y).Single().Completed;
         }
 
-        private static void ValidateXAxis(ISquare[] squares, int y)
+        private static void ValidateXAxis(Square[] squares, int y)
         {
             var xSequence = squares.Where(s => s.Position.Y == y).Select(s => s.Position.X).Distinct().ToArray();
             var checkSequence = Enumerable.Range(1, xSequence.Count()).ToArray();

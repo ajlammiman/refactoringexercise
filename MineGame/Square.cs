@@ -1,13 +1,6 @@
 ﻿namespace MineGame
 {
-    public interface ISquare
-    {
-        Position Position { get;  }
-        bool Completed { get; }
-        bool IsMined { get; }
-    }
-
-    public class Square : ISquare
+    public class Square
     {
         public Position Position { get; private set; }
         public bool Completed { get; private set; }
