@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MineGame
 {
@@ -22,11 +24,11 @@ namespace MineGame
 
     public class Game : IGame
     {
-        private readonly IBoard board;
+        private readonly Tuple<int, int, bool, bool>[] board;
         private readonly IPlayer player;
 
 
-        public Game(IBoard board, IPlayer player)
+        public Game(Tuple<int, int, bool, bool>[] board, IPlayer player)
         {
             this.board = board;
             this.player = player;
@@ -81,7 +83,7 @@ namespace MineGame
         {
             var moveState = MoveState.Valid;
 
-            var mined = board.HasMine(newPosition);
+            var mined = board.Any(s => s.Item1 == newPosition.Key && s.Item2 == newPosition.Value && s.Item4);
 
             if (mined)
                 moveState = MoveState.Mined;
@@ -96,7 +98,7 @@ namespace MineGame
 
         public new KeyValuePair<int, int> PlayerPosition => player.CurrentPosition;
 
-        public bool Completed() => board.IsCompleted(player.CurrentPosition);
+        public bool Completed() => board.Where(s => s.Item1 == player.CurrentPosition.Key && s.Item2 == player.CurrentPosition.Value).Single().Item3;
         
     }
 }
