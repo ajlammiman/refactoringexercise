@@ -12,27 +12,27 @@ namespace MineGameConsole
 
             Console.WriteLine(consoleGame.Start());
 
-            ConsoleKey choice;
+            string choice;
             do
             {
-                choice = Console.ReadKey(true).Key;
+                choice = Console.ReadKey(true).Key.ToString();
                 switch(choice)
                 {
-                    case ConsoleKey.W:
+                    case "w":
                         Console.WriteLine(consoleGame.MoveUp());
                         break;
-                    case ConsoleKey.X:
+                    case "x":
                         Console.WriteLine(consoleGame.MoveDown());
                         break;
-                    case ConsoleKey.A:
+                    case "a":
                         Console.WriteLine(consoleGame.MoveLeft());
                         break;
-                    case ConsoleKey.S:
+                    case "s":
                         Console.WriteLine(consoleGame.MoveRight());
                         break;
                 }
             }
-            while (choice != ConsoleKey.Escape);
+            while (choice != "q");
         }
     }
 }

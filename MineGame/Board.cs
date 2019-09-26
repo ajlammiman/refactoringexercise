@@ -13,26 +13,26 @@ namespace MineGame
 
     public class Board : IBoard
     {
-        public Square[] Squares { get; private set; }
+        public Tuple<int, int, bool, bool>[] Squares { get; private set; }
 
-        public Board(IEnumerable<Square> squares)
+        public Board(IEnumerable<Tuple<int, int, bool, bool>> squares)
         {
             Squares = squares.ToArray();
         }
 
         public bool IsCompleted(KeyValuePair<int, int> position)
         {
-            return Squares.Where(s => s.Position.Key == position.Key && s.Position.Value == position.Value).Single().Completed;
+            return Squares.Where(s => s.Item1 == position.Key && s.Item2 == position.Value).Single().Item3;
         }
               
         public bool IsValidMove(KeyValuePair<int, int> position)
         {
-            return Squares.Any(s => s.Position.Equals(position));
+            return Squares.Any(s => s.Item1.Equals(position.Value));
         }
 
         public bool HasMine(KeyValuePair<int,int> newPosition)
         {
-            return Squares.Any(s => s.Position.Key == newPosition.Key && s.Position.Value == newPosition.Value && s.IsMined);
+            return Squares.Any(s => s.Item1 == newPosition.Key && s.Item2 == newPosition.Value && s.Item4);
         }
     }
 }

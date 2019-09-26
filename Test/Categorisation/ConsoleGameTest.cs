@@ -106,7 +106,7 @@ namespace Test
 
         private ConsoleGame buildGame(int xLength, int yLength, KeyValuePair<int, int> startPosition, int mines, int lives, bool completed)
         {
-            var squares = new List<Square>();
+            var squares = new List<Tuple<int, int, bool, bool>>();
             int mineCount = 0;
 
             for (int y = 1; y <= yLength; y++)
@@ -114,7 +114,7 @@ namespace Test
                 {
                     var mined = (mineCount <= mines) ? true : false;
                     var p = new KeyValuePair<int, int>(x,y);
-                    squares.Add(new Square(p, completed, mined));
+                    squares.Add(new Tuple<int, int, bool, bool>(p.Key, p.Value, completed, mined));
 
                     mineCount++;
                 }
