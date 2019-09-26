@@ -42,7 +42,7 @@ namespace MineGameConsole
 
         private string MoveMessage(MoveState moveState, string direction)
         {
-            var playerPosition = $"Square {game.PlayerPosition.X},{game.PlayerPosition.Y}";
+            var playerPosition = $"Square {game.PlayerPosition.Key},{game.PlayerPosition.Value}";
             string messsage;
 
             if (moveState == MoveState.Invalid)

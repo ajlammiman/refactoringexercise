@@ -6,9 +6,9 @@ namespace MineGame
 {
     public interface IBoard
     {
-        bool IsValidMove(Position position);
-        bool HasMine(Position newPosition);
-        bool IsCompleted(Position position);
+        bool IsValidMove(KeyValuePair<int, int> position);
+        bool HasMine(KeyValuePair<int, int> newPosition);
+        bool IsCompleted(KeyValuePair<int, int> position);
     }
 
     public class Board : IBoard
@@ -18,47 +18,21 @@ namespace MineGame
         public Board(IEnumerable<Square> squares)
         {
             Squares = squares.ToArray();
-            ValidateBoard(Squares);
         }
 
-        private void ValidateBoard(Square[] squares)
+        public bool IsCompleted(KeyValuePair<int, int> position)
         {
-            var ySequence = squares.Select(s => s.Position.Y).Distinct().ToArray();
-            var checkSequence = Enumerable.Range(1, ySequence.Count()).ToArray();
-
-            for (int i = 0; i < ySequence.Max(); i++)
-            {
-                if (i > ySequence.Length || ySequence[i] != checkSequence[i])
-                    throw new Exception("Board cannot be created, y axis squares not in sequence");
-
-                ValidateXAxis(squares, ySequence[i]);
-            }
-
+            return Squares.Where(s => s.Position.Key == position.Key && s.Position.Value == position.Value).Single().Completed;
         }
-
-        public bool IsCompleted(Position position)
-        {
-            return Squares.Where(s => s.Position.X == position.X && s.Position.Y == position.Y).Single().Completed;
-        }
-
-        private static void ValidateXAxis(Square[] squares, int y)
-        {
-            var xSequence = squares.Where(s => s.Position.Y == y).Select(s => s.Position.X).Distinct().ToArray();
-            var checkSequence = Enumerable.Range(1, xSequence.Count()).ToArray();
-
-            for (int i = 0; i < xSequence.Max(); i++)
-                if (i > xSequence.Length || xSequence[i] != checkSequence[i])
-                    throw new Exception("Board cannot be created, x axis squares not in sequence");
-        }
-
-        public bool IsValidMove(Position position)
+              
+        public bool IsValidMove(KeyValuePair<int, int> position)
         {
             return Squares.Any(s => s.Position.Equals(position));
         }
 
-        public bool HasMine(Position newPosition)
+        public bool HasMine(KeyValuePair<int,int> newPosition)
         {
-            return Squares.Any(s => s.Position.Equals(newPosition) && s.IsMined);
+            return Squares.Any(s => s.Position.Key == newPosition.Key && s.Position.Value == newPosition.Value && s.IsMined);
         }
     }
 }

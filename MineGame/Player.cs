@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MineGame
 {
     public interface IPlayer
     {
-        Position CurrentPosition { get; }
-        void ChangePosition(Position newPosition);
+        KeyValuePair<int, int> CurrentPosition { get; }
+        void ChangePosition(KeyValuePair<int, int> newPosition);
         bool IsAlive { get; }
         int Lives { get; }
         void LoseALife();
@@ -13,15 +14,15 @@ namespace MineGame
     public class Player : IPlayer
     {
         public int Lives { get; private set; }
-        public Position CurrentPosition { get; private set; }
+        public KeyValuePair<int, int> CurrentPosition { get; private set; }
 
-        public Player(Position start, int lives)
+        public Player(KeyValuePair<int, int> start, int lives)
         {
             CurrentPosition = start;
             Lives = lives;
         }
 
-        public void ChangePosition(Position newPosition)
+        public void ChangePosition(KeyValuePair<int, int> newPosition)
         {
             CurrentPosition = newPosition;
         }

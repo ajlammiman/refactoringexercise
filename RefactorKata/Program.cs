@@ -1,5 +1,6 @@
 ﻿using MineGame;
 using System;
+using System.Collections.Generic;
 
 namespace MineGameConsole
 {
@@ -7,7 +8,7 @@ namespace MineGameConsole
     {
         public static void Main()
         {
-            var consoleGame = new GameBuilder(10, 10, 5, new Position(1, 1), new Position(10, 10), 3).Build();
+            var consoleGame = new GameBuilder(10, 10, 5, new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(10, 10), 3).Build();
 
             Console.WriteLine(consoleGame.Start());
 

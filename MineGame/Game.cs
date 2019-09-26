@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace MineGame
 {
@@ -16,7 +16,7 @@ namespace MineGame
         MoveState MoveRight();
         MoveState MoveUp();
         int LivesLeft { get; }
-        Position PlayerPosition { get; }
+        KeyValuePair<int, int> PlayerPosition { get; }
         bool Completed();
     }
 
@@ -35,7 +35,7 @@ namespace MineGame
         public MoveState MoveUp()
         {
             var currentPosition = player.CurrentPosition;
-            var newPosition = new Position(currentPosition.X, currentPosition.Y + 1);
+            var newPosition = new KeyValuePair<int, int>(currentPosition.Key, currentPosition.Value + 1);
 
             return MakeAMove(newPosition);
         }
@@ -43,7 +43,7 @@ namespace MineGame
         public MoveState MoveDown()
         {
             var currentPosition = player.CurrentPosition;
-            var newPosition = new Position(currentPosition.X, currentPosition.Y - 1);
+            var newPosition = new KeyValuePair<int, int>(currentPosition.Key, currentPosition.Value - 1);
 
             return MakeAMove(newPosition);
         }
@@ -51,7 +51,7 @@ namespace MineGame
         public MoveState MoveLeft()
         {
             var currentPosition = player.CurrentPosition;
-            var newPosition = new Position(currentPosition.X - 1, currentPosition.Y);
+            var newPosition = new KeyValuePair<int, int>(currentPosition.Key - 1, currentPosition.Value);
 
             return MakeAMove(newPosition);
         }
@@ -59,12 +59,12 @@ namespace MineGame
         public MoveState MoveRight()
         {
             var currentPosition = player.CurrentPosition;
-            var newPosition = new Position(currentPosition.X + 1, currentPosition.Y);
+            var newPosition = new KeyValuePair<int, int>(currentPosition.Key + 1, currentPosition.Value);
 
             return MakeAMove(newPosition);
         }
 
-        private MoveState MakeAMove(Position newPosition) {
+        private MoveState MakeAMove(KeyValuePair<int,int> newPosition) {
             
             var moveState = CalculateMoveState(newPosition);
 
@@ -77,18 +77,15 @@ namespace MineGame
             return moveState;
         }
 
-        private MoveState CalculateMoveState(Position newPosition)
+        private MoveState CalculateMoveState(KeyValuePair<int,int> newPosition)
         {
-            var moveState = MoveState.Invalid;
+            var moveState = MoveState.Valid;
 
-            var validMove = board.IsValidMove(newPosition);
             var mined = board.HasMine(newPosition);
 
-            if (validMove && !mined)
-                moveState = MoveState.Valid;
-            else if (mined)
+            if (mined)
                 moveState = MoveState.Mined;
-            
+
             return moveState;
         }
 
@@ -97,7 +94,7 @@ namespace MineGame
 
         public int LivesLeft => player.Lives;
 
-        public Position PlayerPosition => player.CurrentPosition;
+        public new KeyValuePair<int, int> PlayerPosition => player.CurrentPosition;
 
         public bool Completed() => board.IsCompleted(player.CurrentPosition);
         

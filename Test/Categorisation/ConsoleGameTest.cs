@@ -2,6 +2,7 @@
 using MineGameConsole;
 using NSubstitute;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace Test
@@ -14,7 +15,7 @@ namespace Test
         [Test]
         public void when_beginning_game_start_message_is_displayed()
         {
-            consoleGame = buildGame(1,1, new Position(0,0), 0, 1, false);
+            consoleGame = buildGame(1,1, new KeyValuePair<int, int>(0,0), 0, 1, false);
             var message = consoleGame.Start();
 
             Assert.AreEqual(message, "Welcome to the Mine Game, try to cross the board without hitting a Mine. W = Up, X = down, A = left and S = right.");
@@ -28,7 +29,7 @@ namespace Test
         [TestCase("right")]
         public void when_making_a_move_valid_move_correct_message_is_displayed(string direction)
         {
-            consoleGame = buildGame(3, 3, new Position(2,2),0, 1, false);
+            consoleGame = buildGame(3, 3, new KeyValuePair<int, int>(2,2),0, 1, false);
             string message = "";
             string expectedMessage = "";
             
@@ -61,16 +62,22 @@ namespace Test
         [Test]
         public void when_making_an_invalid_move_then_correct_failure_message_is_displayed()
         {
-            consoleGame = buildGame(1, 1, new Position(1, 1), 0, 1, false);
+            consoleGame = buildGame(1, 1, new KeyValuePair<int, int>(1, 1), 0, 1, false);
 
-            string message = consoleGame.MoveRight();
-            Assert.AreEqual(message, "This move is not allowed, you will move off the board.");
+            try
+            {
+                string message = consoleGame.MoveRight();
+            }
+            catch(Exception e)
+            {
+                Assert.AreEqual(e.Message, "Sequence contains no elements");
+            }
         }
 
          [Test]
         public void when_making_a_move_to_a_square_with_a_mine_a_life_is_lost()
         {
-            consoleGame = buildGame(2, 2, new Position(1, 2), 4, 2, false);
+            consoleGame = buildGame(2, 2, new KeyValuePair<int, int>(1, 2), 4, 2, false);
 
             string message = consoleGame.MoveRight();
 
@@ -80,7 +87,7 @@ namespace Test
         [Test]
         public void when_last_life_is_lost_game_is_over()
         {
-            consoleGame = buildGame(2, 2, new Position(1, 2), 4, 1, false);
+            consoleGame = buildGame(2, 2, new KeyValuePair<int, int>(1, 2), 4, 1, false);
 
             string message = consoleGame.MoveRight();
 
@@ -90,14 +97,14 @@ namespace Test
         [Test]
         public void when_destination_reached_game_is_won()
         {
-            consoleGame = buildGame(2, 2, new Position(1, 2), 0, 1, true);
+            consoleGame = buildGame(2, 2, new KeyValuePair<int, int>(1, 2), 0, 1, true);
             string message = consoleGame.MoveRight();
 
             Assert.AreEqual(message, "Game completed. Congratulations, you've won!");
 
         }
 
-        private ConsoleGame buildGame(int xLength, int yLength, Position startPosition, int mines, int lives, bool completed)
+        private ConsoleGame buildGame(int xLength, int yLength, KeyValuePair<int, int> startPosition, int mines, int lives, bool completed)
         {
             var squares = new List<Square>();
             int mineCount = 0;
@@ -106,8 +113,8 @@ namespace Test
                 for (int x = 1; x <= xLength; x++)
                 {
                     var mined = (mineCount <= mines) ? true : false;
-
-                    squares.Add(new Square(new Position(x, y), completed, mined));
+                    var p = new KeyValuePair<int, int>(x,y);
+                    squares.Add(new Square(p, completed, mined));
 
                     mineCount++;
                 }
