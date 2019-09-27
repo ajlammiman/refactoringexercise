@@ -15,7 +15,7 @@ namespace MineGameConsole
             string choice;
             do
             {
-                choice = Console.ReadKey(true).Key.ToString();
+                choice = Console.ReadKey(true).Key.ToString().ToLower();
                 switch(choice)
                 {
                     case "w":

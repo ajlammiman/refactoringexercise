@@ -12,8 +12,7 @@ namespace MineGameConsole
         public GameBuilder(int xLength, int yLength, int mines, KeyValuePair<int, int> start, KeyValuePair<int, int> finish, int lives)
         {
             var board = Build(xLength, yLength, mines, finish);
-            var player = new Player(start, lives);
-            var game = new Game(board,player);
+            var game = new Game(board, start, lives);
             consoleGame = new ConsoleGame(game);
         }
 

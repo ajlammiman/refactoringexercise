@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MineBuilder.cs" />
     <Compile Include="Player.cs" />

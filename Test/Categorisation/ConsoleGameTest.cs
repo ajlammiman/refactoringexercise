@@ -119,7 +119,7 @@ namespace Test
                     mineCount++;
                 }
             
-            var game = new Game(board.ToArray(), new Player(startPosition, lives));
+            var game = new Game(board.ToArray(), startPosition, lives);
             return new ConsoleGame(game);
         }
     }
