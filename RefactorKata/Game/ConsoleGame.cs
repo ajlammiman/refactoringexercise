@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MineGame;
 
 namespace MineGameConsole
 {
+    public enum MoveState
+    {
+        Valid,
+        Invalid,
+        Mined
+    }
     public class ConsoleGame
     {
         private readonly Tuple<int, int, bool, bool>[] board;
@@ -17,7 +22,7 @@ namespace MineGameConsole
             Lives = lives;
         }
 
-        public string MoveUp()
+        public string Up()
         {
             var currentPosition = CurrentPosition;
             var newPosition = new KeyValuePair<int, int>(currentPosition.Key, currentPosition.Value + 1);
@@ -26,7 +31,7 @@ namespace MineGameConsole
             return MoveMessage(moveState, "up");
         }
 
-        public string MoveDown()
+        public string Down()
         {
             var currentPosition = CurrentPosition;
             var newPosition = new KeyValuePair<int, int>(currentPosition.Key, currentPosition.Value - 1);
@@ -35,7 +40,7 @@ namespace MineGameConsole
             return MoveMessage(moveState, "down");
         }
 
-        public string MoveLeft()
+        public string Left()
         {
             var currentPosition = CurrentPosition;
             var newPosition = new KeyValuePair<int, int>(currentPosition.Key - 1, currentPosition.Value);
@@ -45,7 +50,7 @@ namespace MineGameConsole
             return MoveMessage(moveState, "left");
         }
 
-        public string MoveRight()
+        public string Right()
         {
             var currentPosition = CurrentPosition;
             var newPosition = new KeyValuePair<int, int>(currentPosition.Key + 1, currentPosition.Value);
@@ -63,7 +68,7 @@ namespace MineGameConsole
                 ChangePosition(newPosition);
 
             if (moveState == MoveState.Mined)
-                LoseALife();
+                Lives--;
 
             return moveState;
         }
@@ -80,14 +85,7 @@ namespace MineGameConsole
             return moveState;
         }
 
-        private void LoseALife() => Lives--;
-
-
-        public int LivesLeft => Lives;
-
         public new KeyValuePair<int, int> PlayerPosition => CurrentPosition;
-
-        public bool Completed() => board.Where(s => s.Item1 == CurrentPosition.Key && s.Item2 == CurrentPosition.Value).Single().Item3;
 
         public void ChangePosition(KeyValuePair<int, int> newPosition)
         {
@@ -140,11 +138,11 @@ namespace MineGameConsole
 
             if (moveState == MoveState.Invalid)
                 messsage = "This move is not allowed, you will move off the board.";
-            else if (moveState == MoveState.Mined && LivesLeft > 0)
-                messsage = $"You have moved one square {direction} and hit a mine, your new position is {playerPosition} and your number of lives is {LivesLeft}";
-            else if (moveState == MoveState.Mined && LivesLeft == 0)
+            else if (moveState == MoveState.Mined && Lives > 0)
+                messsage = $"You have moved one square {direction} and hit a mine, your new position is {playerPosition} and your number of lives is {Lives}";
+            else if (moveState == MoveState.Mined && Lives == 0)
                 messsage = "You have lost your last life, GAME OVER!";
-            else if ((moveState == MoveState.Mined || moveState == MoveState.Valid) && LivesLeft > 0 && Completed())
+            else if ((moveState == MoveState.Mined || moveState == MoveState.Valid) && Lives > 0 && board.Where(s => s.Item1 == CurrentPosition.Key && s.Item2 == CurrentPosition.Value).Single().Item3)
                 messsage = "Game completed. Congratulations, you've won!";
             else
                 messsage = $"You have moved one square {direction}, your new position is {playerPosition}";

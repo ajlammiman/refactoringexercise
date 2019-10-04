@@ -11,10 +11,7 @@ C:\Users\alammiman\source\repos\RefactorKata\obj\Debug\MineGameConsole.pdb
 C:\Projects\refactoringexercise\RefactorKata\bin\MineGameConsole.exe.config
 C:\Projects\refactoringexercise\RefactorKata\bin\MineGameConsole.exe
 C:\Projects\refactoringexercise\RefactorKata\bin\MineGameConsole.pdb
-C:\Projects\refactoringexercise\RefactorKata\bin\MineGame.dll
-C:\Projects\refactoringexercise\RefactorKata\bin\MineGame.pdb
 C:\Projects\refactoringexercise\RefactorKata\obj\Debug\MineGameConsole.csprojAssemblyReference.cache
 C:\Projects\refactoringexercise\RefactorKata\obj\Debug\MineGameConsole.csproj.CoreCompileInputs.cache
-C:\Projects\refactoringexercise\RefactorKata\obj\Debug\MineGameConsole.csproj.CopyComplete
 C:\Projects\refactoringexercise\RefactorKata\obj\Debug\MineGameConsole.exe
 C:\Projects\refactoringexercise\RefactorKata\obj\Debug\MineGameConsole.pdb

@@ -1,5 +1,4 @@
-﻿using MineGame;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MineGameConsole
@@ -19,16 +18,16 @@ namespace MineGameConsole
                 switch(choice)
                 {
                     case "w":
-                        Console.WriteLine(consoleGame.MoveUp());
+                        Console.WriteLine(consoleGame.Up());
                         break;
                     case "x":
-                        Console.WriteLine(consoleGame.MoveDown());
+                        Console.WriteLine(consoleGame.Down());
                         break;
                     case "a":
-                        Console.WriteLine(consoleGame.MoveLeft());
+                        Console.WriteLine(consoleGame.Left());
                         break;
                     case "s":
-                        Console.WriteLine(consoleGame.MoveRight());
+                        Console.WriteLine(consoleGame.Right());
                         break;
                 }
             }

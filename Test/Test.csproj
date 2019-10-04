@@ -65,10 +65,6 @@
     <Compile Include="Categorisation\ConsoleGameTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MineGame\MineGame.csproj">
-      <Project>{7e70bc79-58bc-456c-bd48-0ca8d0c8cfbf}</Project>
-      <Name>MineGame</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RefactorKata\MineGameConsole.csproj">
       <Project>{d267b1c6-0e76-4a2b-916c-8417ff42a5b1}</Project>
       <Name>MineGameConsole</Name>

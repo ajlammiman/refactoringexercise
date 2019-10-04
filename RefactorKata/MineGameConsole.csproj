@@ -50,11 +50,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MineGame\MineGame.csproj">
-      <Project>{7e70bc79-58bc-456c-bd48-0ca8d0c8cfbf}</Project>
-      <Name>MineGame</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
