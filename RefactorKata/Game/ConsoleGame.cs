@@ -5,9 +5,9 @@ namespace MineGameConsole
 {
     public class ConsoleGame
     {
-        private IGame game;
+        private Game game;
 
-        public ConsoleGame(IGame game)
+        public ConsoleGame(Game game)
         {
             this.game = game;
         }

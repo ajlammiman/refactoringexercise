@@ -11,18 +11,7 @@ namespace MineGame
         Mined
     }
 
-    public interface IGame
-    {
-        MoveState MoveDown();
-        MoveState MoveLeft();
-        MoveState MoveRight();
-        MoveState MoveUp();
-        int LivesLeft { get; }
-        KeyValuePair<int, int> PlayerPosition { get; }
-        bool Completed();
-    }
-
-    public class Game : IGame
+    public class Game 
     {
         private readonly Tuple<int, int, bool, bool>[] board;
         public KeyValuePair<int, int> CurrentPosition { get; set; }
