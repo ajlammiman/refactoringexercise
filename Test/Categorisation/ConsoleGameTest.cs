@@ -106,8 +106,7 @@ namespace Test
 
         private ConsoleGame buildGame(int xLength, int yLength, KeyValuePair<int, int> start, KeyValuePair<int, int> finish, int mines, int lives, bool completed)
         {
-            var game = new Game(xLength, yLength, mines, finish, start, lives);
-            return new ConsoleGame(game);
+            return new ConsoleGame(xLength, yLength, mines, start, finish, lives);
         }
     }
 
