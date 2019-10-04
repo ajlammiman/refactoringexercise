@@ -8,7 +8,8 @@ namespace MineGameConsole
     {
         public static void Main()
         {
-            var consoleGame = new GameBuilder(10, 10, 5, new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(10, 10), 3).Build();
+            var game = new Game(10, 10, 5, new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(10, 10), 3);
+            var consoleGame = new ConsoleGame(game);
 
             Console.WriteLine(consoleGame.Start());
 
