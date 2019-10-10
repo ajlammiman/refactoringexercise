@@ -11,7 +11,7 @@ namespace MineGameConsole
     }
     public class ConsoleGame
     {
-        public readonly Tuple<int, int, bool, bool>[] board;
+        public Tuple<int, int, bool, bool>[] board { get; set; }
         public KeyValuePair<int, int> position { get; set; }
         public int Lives { get; set; }
         public ConsoleGame(int xLength, int yLength, int mines, KeyValuePair<int, int> start, KeyValuePair<int, int> finish, int lives)
@@ -21,7 +21,7 @@ namespace MineGameConsole
             Lives = lives;
         }
 
-        public string NewMakeAMove(string move)
+        public string Change(string move)
         {
             var moveState = MoveState.Valid;
             var newPosition = new KeyValuePair<int, int>();
@@ -54,30 +54,10 @@ namespace MineGameConsole
             if (moveState == MoveState.Mined)
                 Lives--;
 
-            return MoveMessage(moveState, move);
+            return Message(moveState, move);
         }
-
-
-        private MoveState MakeAMove(KeyValuePair<int, int> newPosition)
-        {
-            var moveState = MoveState.Valid;
-
-            var mined = board.Any(s => s.Item1 == newPosition.Key && s.Item2 == newPosition.Value && s.Item4);
-
-            if (mined)
-                moveState = MoveState.Mined;
-
-            if (moveState == MoveState.Valid || moveState == MoveState.Mined)
-                position = newPosition;
-
-            if (moveState == MoveState.Mined)
-                Lives--;
-
-            return moveState;
-        }
-
         
-        public static Tuple<int, int, bool, bool>[] Build(int length1, int length2, int number, KeyValuePair<int, int> completedPosition)
+        public static Tuple<int, int, bool, bool>[] Build(int length1, int length2, int number, KeyValuePair<int, int> cp)
         {
             var pm = new Dictionary<int, KeyValuePair<int, int>>();
             var counter = 0;
@@ -91,23 +71,23 @@ namespace MineGameConsole
                 }
             }
             var r = new Random();
-            var mineIds = pm.Select(p => p.Key).OrderBy(o => r.Next(pm.Count)).Take(number).ToArray();
+            var ids = pm.Select(p => p.Key).OrderBy(o => r.Next(pm.Count)).Take(number).ToArray();
 
-            var mines = pm.Where(p => mineIds.Contains(p.Key)).Select(p => p.Value).ToList();
+            var ms = pm.Where(p => ids.Contains(p.Key)).Select(p => p.Value).ToList();
 
-            var squares = new List<Tuple<int, int, bool, bool>>();
+            var sq = new List<Tuple<int, int, bool, bool>>();
 
             for (int y = 1; y <= length2; y++)
             {
                 for (int x = 1; x <= length1; x++)
                 {
-                    var isMined = mines.Where(m => m.Equals(new KeyValuePair<int, int>(x, y))).Any();
-                    var isCompleted = (completedPosition.Key == x && completedPosition.Value == y) ? true : false;
+                    var im = ms.Where(m => m.Equals(new KeyValuePair<int, int>(x, y))).Any();
+                    var ic = (cp.Key == x && cp.Value == y) ? true : false;
                     var p = new KeyValuePair<int, int>(x, y);
-                    squares.Add(new Tuple<int, int, bool, bool>(p.Key, p.Value, isCompleted, isMined));
+                    sq.Add(new Tuple<int, int, bool, bool>(p.Key, p.Value, ic, im));
                 }
             }
-            return squares.ToArray();
+            return sq.ToArray();
         }
 
         public string Start()
@@ -116,19 +96,19 @@ namespace MineGameConsole
         }
 
         
-        private string MoveMessage(MoveState moveState, string direction)
+        private string Message(MoveState moveState, string direction)
         {
-            var playerPosition = $"Square {position.Key},{position.Value}";
+            var pp = $"Square {position.Key},{position.Value}";
             string messsage;
 
             if (moveState == MoveState.Mined && Lives > 0)
-                messsage = $"You have moved one square {direction} and hit a mine, your new position is {playerPosition} and your number of lives is {Lives}";
+                messsage = $"You have moved one square {direction} and hit a mine, your new position is {pp} and your number of lives is {Lives}";
             else if (moveState == MoveState.Mined && Lives == 0)
                 messsage = "You have lost your last life, GAME OVER!";
             else if ((moveState == MoveState.Mined || moveState == MoveState.Valid) && Lives > 0 && board.Where(s => s.Item1 == position.Key && s.Item2 == position.Value).Single().Item3)
                 messsage = "Game completed. Congratulations, you've won!";
             else
-                messsage = $"You have moved one square {direction}, your new position is {playerPosition}";
+                messsage = $"You have moved one square {direction}, your new position is {pp}";
 
             return messsage;
         }

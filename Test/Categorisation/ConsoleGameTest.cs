@@ -34,19 +34,19 @@ namespace Test
             switch (direction)
             {
                 case "up":
-                    message = consoleGame.NewMakeAMove("up");
+                    message = consoleGame.Change("up");
                     expectedMessage = $"You have moved one square {direction}, your new position is Square 2,3";
                     break;
                 case "down":
-                    message = consoleGame.NewMakeAMove("down");
+                    message = consoleGame.Change("down");
                     expectedMessage = $"You have moved one square {direction}, your new position is Square 2,1";
                     break;
                 case "left":
-                    message = consoleGame.NewMakeAMove("left");
+                    message = consoleGame.Change("left");
                     expectedMessage = $"You have moved one square {direction}, your new position is Square 1,2";
                     break;
                 case "right":
-                    message = consoleGame.NewMakeAMove("right");
+                    message = consoleGame.Change("right");
                     expectedMessage = $"You have moved one square {direction}, your new position is Square 3,2";
                     break;
             }
@@ -64,7 +64,7 @@ namespace Test
 
             try
             {
-                string message = consoleGame.NewMakeAMove("right");
+                string message = consoleGame.Change("right");
             }
             catch(Exception e)
             {
@@ -77,7 +77,7 @@ namespace Test
         {
             consoleGame = buildGame(2, 2, new KeyValuePair<int, int>(1, 2), new KeyValuePair<int, int>(4, 4), 4, 2, false);
 
-            string message = consoleGame.NewMakeAMove("right");
+            string message = consoleGame.Change("right");
 
             Assert.AreEqual("You have moved one square right and hit a mine, your new position is Square 2,2 and your number of lives is 1", message);
         }
@@ -87,7 +87,7 @@ namespace Test
         {
             consoleGame = buildGame(2, 2, new KeyValuePair<int, int>(1, 2), new KeyValuePair<int, int>(2, 2), 4, 1, false);
 
-            string message = consoleGame.NewMakeAMove("right");
+            string message = consoleGame.Change("right");
 
             Assert.AreEqual(message, "You have lost your last life, GAME OVER!");
         }
@@ -96,7 +96,7 @@ namespace Test
         public void when_destination_reached_game_is_won()
         {
             consoleGame = buildGame(2, 2, new KeyValuePair<int, int>(1, 2), new KeyValuePair<int, int>(2, 2), 0, 1, true);
-            string message = consoleGame.NewMakeAMove("right");
+            string message = consoleGame.Change("right");
 
             Assert.AreEqual(message, "Game completed. Congratulations, you've won!");
 

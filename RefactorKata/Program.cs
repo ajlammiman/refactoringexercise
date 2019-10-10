@@ -7,9 +7,9 @@ namespace MineGameConsole
     {
         public static void Main()
         {
-            var consoleGame = new ConsoleGame(10, 10, 5, new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(10, 10), 3);
+            var game = new ConsoleGame(10, 10, 5, new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(10, 10), 3);
 
-            Console.WriteLine(consoleGame.Start());
+            Console.WriteLine(game.Start());
 
             string choice;
             do
@@ -18,16 +18,16 @@ namespace MineGameConsole
                 switch(choice)
                 {
                     case "w":
-                        Console.WriteLine(consoleGame.NewMakeAMove("up"));
+                        Console.WriteLine(game.Change("up"));
                         break;
                     case "x":
-                        Console.WriteLine(consoleGame.NewMakeAMove("down"));
+                        Console.WriteLine(game.Change("down"));
                         break;
                     case "a":
-                        Console.WriteLine(consoleGame.NewMakeAMove("left"));
+                        Console.WriteLine(game.Change("left"));
                         break;
                     case "s":
-                        Console.WriteLine(consoleGame.NewMakeAMove("right"));
+                        Console.WriteLine(game.Change("right"));
                         break;
                 }
             }
