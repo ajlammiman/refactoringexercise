@@ -18,16 +18,16 @@ namespace MineGameConsole
                 switch(choice)
                 {
                     case "w":
-                        Console.WriteLine(consoleGame.Up());
+                        Console.WriteLine(consoleGame.NewMakeAMove("up"));
                         break;
                     case "x":
-                        Console.WriteLine(consoleGame.Down());
+                        Console.WriteLine(consoleGame.NewMakeAMove("down"));
                         break;
                     case "a":
-                        Console.WriteLine(consoleGame.Left());
+                        Console.WriteLine(consoleGame.NewMakeAMove("left"));
                         break;
                     case "s":
-                        Console.WriteLine(consoleGame.Right());
+                        Console.WriteLine(consoleGame.NewMakeAMove("right"));
                         break;
                 }
             }

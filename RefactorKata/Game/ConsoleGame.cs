@@ -21,43 +21,42 @@ namespace MineGameConsole
             Lives = lives;
         }
 
-        public string Up()
+        public string NewMakeAMove(string move)
         {
-            var currentPosition = position;
-            var newPosition = new KeyValuePair<int, int>(currentPosition.Key, currentPosition.Value + 1);
+            var moveState = MoveState.Valid;
+            var newPosition = new KeyValuePair<int, int>();
 
-            var moveState = MakeAMove(newPosition);
-            return MoveMessage(moveState, "up");
+            if (move == "right")
+            {
+                newPosition = new KeyValuePair<int, int>(position.Key + 1, position.Value);
+            }
+            else if (move == "left")
+            {
+                newPosition = new KeyValuePair<int, int>(position.Key - 1, position.Value);
+            }
+            else if (move == "down")
+            {
+                newPosition = new KeyValuePair<int, int>(position.Key, position.Value - 1);
+            }
+            else if (move == "up")
+            {
+                newPosition = new KeyValuePair<int, int>(position.Key, position.Value + 1);
+            }
+
+            var mined = board.Any(s => s.Item1 == newPosition.Key && s.Item2 == newPosition.Value && s.Item4);
+
+            if (mined)
+                moveState = MoveState.Mined;
+
+            if (moveState == MoveState.Valid || moveState == MoveState.Mined)
+                position = newPosition;
+
+            if (moveState == MoveState.Mined)
+                Lives--;
+
+            return MoveMessage(moveState, move);
         }
 
-        public string Down()
-        {
-            var currentPosition = position;
-            var newPosition = new KeyValuePair<int, int>(currentPosition.Key, currentPosition.Value - 1);
-
-            var moveState = MakeAMove(newPosition);
-            return MoveMessage(moveState, "down");
-        }
-
-        public string Left()
-        {
-            var currentPosition = position;
-            var newPosition = new KeyValuePair<int, int>(currentPosition.Key - 1, currentPosition.Value);
-
-            var moveState = MakeAMove(newPosition);
-
-            return MoveMessage(moveState, "left");
-        }
-
-        public string Right()
-        {
-            var currentPosition = position;
-            var newPosition = new KeyValuePair<int, int>(currentPosition.Key + 1, currentPosition.Value);
-
-            var moveState = MakeAMove(newPosition);
-
-            return MoveMessage(moveState, "right");
-        }
 
         private MoveState MakeAMove(KeyValuePair<int, int> newPosition)
         {
